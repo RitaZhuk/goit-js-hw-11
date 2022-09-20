@@ -25,20 +25,6 @@ let simpleLightbox;
 onScroll();
 onToTopBtn();
 
-// const optionsIO = {
-//     rootMargin: '200px',
-//     treshold: 1.0,
-// };
-// const observer = new IntersectionObserver(entries => {
-//     entries.forEach(entry => {
-//         if (searchValue === '') {
-//             return;
-//         } else if (entry.isIntersecting) {
-//             onNextImagesAdd();
-//         };
-//     });
-// }, optionsIO);
-
 async function onSubmit(event) {
     event.preventDefault();
     searchValue = input.value.trim();
@@ -61,7 +47,6 @@ async function onSubmit(event) {
                 gallery.innerHTML = imageCreate(result.hits);
                 simpleLightbox = new SimpleLightbox(".gallery a", optionsSL).refresh();
                 buttonUnHidden();
-                // observer.observe(document.querySelector(".scroll-guard"));
                 Notiflix.Notify.success(`Hooray! We found ${result.totalHits} images.`);
             };
         } catch (error) {
@@ -70,30 +55,7 @@ async function onSubmit(event) {
     };
 };
 
-// function onSubmit(event) {
-//     event.preventDefault();
-//     searchValue = input.value.trim();
-//     if (searchValue === '') {
-//         clearAll();
-//         Notiflix.Notify.info('You cannot search by empty field, try again.');
-//         return;
-//     } else {
-//         resetPage()
-//         fetchImages(searchValue).then(allImages => {
-//             if (allImages.hits < 1) {
-//                 clearAll();
-//                 buttonLoadMore.classList.add("visually-hidden");
-//                 Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.');
-//             } else {
-//                 gallery.innerHTML = imageCreate(allImages.hits);
-//                 buttonLoadMore.classList.remove("visually-hidden");
-//                 Notiflix.Notify.success(`Hooray! We found ${allImages.totalHits} images.`);
-//             };
-//         }).catch(() => {
-//             ifError();
-//         });
-//     };
-// };
+
 
 async function onNextImagesAdd() {
     //page += 1;
@@ -113,19 +75,7 @@ async function onNextImagesAdd() {
     };
 };
 
-// function onNextImagesAdd() {
-//   //page += 1;
-//     fetchImages(searchValue).then(allImages => {
-//         const totalPages = page * perPage;
-//         if (allImages.totalHits <= totalPages) {
-//             buttonLoadMore.classList.add("visually-hidden");
-//             Notiflix.Report.info('Wow', "We're sorry, but you've reached the end of search results.", 'Okay');
-//         }
-//         gallery.insertAdjacentHTML('beforeend', imageCreate(allImages.hits));
-//     }).catch(() => {
-//         ifError();
-//     });
-// };
+
 
 function ifError() {
     clearAll();
