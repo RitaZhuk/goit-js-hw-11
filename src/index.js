@@ -1,6 +1,4 @@
 import axios from 'axios';
-// import fetchImages from './fetch-images';
-// import cardTemplate from '../templates/card-template.hbs';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
