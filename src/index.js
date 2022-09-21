@@ -75,7 +75,7 @@ async function onNextImagesAdd() {
             }
         gallery.insertAdjacentHTML('beforeend', imageCreate(result.hits));
         smothScroll();
-        simpleLightbox = new SimpleLightbox(".gallery a", optionsSL).refresh();
+        simpleLightbox.refresh();
     } catch (error) {
         ifError();
     };
