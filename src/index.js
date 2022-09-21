@@ -105,3 +105,5 @@ function smothScroll() {
     behavior: "smooth",
 });
 };
+
+if(result.totalHits < perPage) {buttonHidden()};
