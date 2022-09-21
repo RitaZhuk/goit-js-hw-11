@@ -5,8 +5,8 @@ import { fetchImages, DEFAULT_PAGE, page, perPage, resetPage } from '../src/js/f
 import { imageCreate } from './js/imageCreate';
 import { onScroll, onToTopBtn } from '../src/js/scroll';
 
-simpleLightbox = new SimpleLightbox(".gallery a", optionsSL);
-simpleLightbox = new SimpleLightbox(".gallery a", optionsSL);
+// simpleLightbox = new SimpleLightbox(".gallery a", optionsSL);
+// simpleLightbox = new SimpleLightbox(".gallery a", optionsSL);
 const form = document.querySelector(".search-form");
 const input = document.querySelector(".input");
 const gallery = document.querySelector(".gallery");
@@ -22,7 +22,7 @@ const optionsSL = {
     captionsData: "alt",
     captionDelay: 250,
 };
-let simpleLightbox;
+let simpleLightbox = new SimpleLightbox(".gallery a", optionsSL);
 
 onScroll();
 onToTopBtn();
