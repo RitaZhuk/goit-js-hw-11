@@ -5,8 +5,6 @@ import { fetchImages, DEFAULT_PAGE, page, perPage, resetPage } from '../src/js/f
 import { imageCreate } from './js/imageCreate';
 import { onScroll, onToTopBtn } from '../src/js/scroll';
 
-simpleLightbox = new SimpleLightbox(".gallery a", optionsSL);
-simpleLightbox = new SimpleLightbox(".gallery a", optionsSL);
 const form = document.querySelector(".search-form");
 const input = document.querySelector(".input");
 const gallery = document.querySelector(".gallery");
@@ -22,10 +20,12 @@ const optionsSL = {
     captionsData: "alt",
     captionDelay: 250,
 };
+
 let simpleLightbox;
 
 onScroll();
 onToTopBtn();
+
 
 async function onSubmit(event) {
     event.preventDefault();
@@ -47,8 +47,9 @@ async function onSubmit(event) {
             } else {
                 form.reset();
                 gallery.innerHTML = imageCreate(result.hits);
-                simpleLightbox.refresh();
+                simpleLightbox = new SimpleLightbox(".gallery a", optionsSL).refresh();
                 buttonUnHidden();
+                // observer.observe(document.querySelector(".scroll-guard"));
                 Notiflix.Notify.success(`Hooray! We found ${result.totalHits} images.`);
             };
         } catch (error) {
@@ -71,12 +72,11 @@ async function onNextImagesAdd() {
             }
         gallery.insertAdjacentHTML('beforeend', imageCreate(result.hits));
         smothScroll();
-        simpleLightbox.refresh();
+        simpleLightbox = new SimpleLightbox(".gallery a", optionsSL).refresh();
     } catch (error) {
         ifError();
     };
 };
-
 
 
 function ifError() {
