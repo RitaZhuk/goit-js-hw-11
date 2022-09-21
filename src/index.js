@@ -5,6 +5,7 @@ import { fetchImages, DEFAULT_PAGE, page, perPage, resetPage } from '../src/js/f
 import { imageCreate } from './js/imageCreate';
 import { onScroll, onToTopBtn } from '../src/js/scroll';
 
+simpleLightbox = new SimpleLightbox(".gallery a", optionsSL);
 const form = document.querySelector(".search-form");
 const input = document.querySelector(".input");
 const gallery = document.querySelector(".gallery");
@@ -45,7 +46,7 @@ async function onSubmit(event) {
             } else {
                 form.reset();
                 gallery.innerHTML = imageCreate(result.hits);
-                simpleLightbox = new SimpleLightbox(".gallery a", optionsSL).refresh();
+                simpleLightbox.refresh();
                 buttonUnHidden();
                 Notiflix.Notify.success(`Hooray! We found ${result.totalHits} images.`);
             };
