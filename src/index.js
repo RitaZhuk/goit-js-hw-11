@@ -6,6 +6,7 @@ import { imageCreate } from './js/imageCreate';
 import { onScroll, onToTopBtn } from '../src/js/scroll';
 
 simpleLightbox = new SimpleLightbox(".gallery a", optionsSL);
+simpleLightbox = new SimpleLightbox(".gallery a", optionsSL);
 const form = document.querySelector(".search-form");
 const input = document.querySelector(".input");
 const gallery = document.querySelector(".gallery");
@@ -70,7 +71,7 @@ async function onNextImagesAdd() {
             }
         gallery.insertAdjacentHTML('beforeend', imageCreate(result.hits));
         smothScroll();
-        simpleLightbox = new SimpleLightbox(".gallery a", optionsSL).refresh();
+        simpleLightbox.refresh();
     } catch (error) {
         ifError();
     };
