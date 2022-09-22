@@ -64,12 +64,12 @@ buttonLoadMore.style.display = 'flex'
 
 
 async function onNextImagesAdd() {
-    page += 1;
+    //page += 1;
     simpleLightbox.destroy();
     try {
         const result = await fetchImages(searchValue);
         const totalPages = page * perPage;
-            if (result.totalHits <= totalPages) {
+            if (page >= 1) {
                 buttonHidden();
                 Notiflix.Report.info('Wow', "We're sorry, but you've reached the end of search results.", 'Okay');
             }
