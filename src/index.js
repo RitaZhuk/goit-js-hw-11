@@ -68,8 +68,11 @@ async function onNextImagesAdd() {
     simpleLightbox.destroy();
     try {
         const result = await fetchImages(searchValue);
+        console.log(totalHits);
+        console.log(perPage);
         const totalPages = totalHits / perPage;
         console.log(totalPages);
+
             if (result.page >= totalPages) {
                 buttonHidden();
                 Notiflix.Report.info('Wow', "We're sorry, but you've reached the end of search results.", 'Okay');
