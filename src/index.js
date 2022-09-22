@@ -70,7 +70,7 @@ async function onNextImagesAdd() {
         const result = await fetchImages(searchValue);
         const totalPages = + totalHits / + perPage;
         console.log(totalPages);
-            if (result.page < totalPages) {
+            if ( + result.page < + totalPages) {
                 buttonHidden();
                 Notiflix.Report.info('Wow', "We're sorry, but you've reached the end of search results.", 'Okay');
             }
