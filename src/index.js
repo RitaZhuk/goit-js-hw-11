@@ -59,7 +59,7 @@ async function onSubmit(event) {
 
 
 async function onNextImagesAdd() {
-    //page += 1;
+    page += 1;
     simpleLightbox.destroy();
     try {
         const result = await fetchImages(searchValue);
