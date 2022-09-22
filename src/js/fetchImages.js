@@ -3,7 +3,7 @@ import axios from 'axios';
 export const DEFAULT_PAGE = 1;
 export let page = DEFAULT_PAGE;
     
-export const perPage = 5;
+export const perPage = 40;
 
 export async function fetchImages(searchValue) {
     const searchParams = new URLSearchParams ({
