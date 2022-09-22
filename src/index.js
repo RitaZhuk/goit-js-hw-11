@@ -55,7 +55,6 @@ buttonLoadMore.style.display = 'flex'
                 simpleLightbox.refresh();
                 buttonUnHidden();
                 Notiflix.Notify.success(`Hooray! We found ${result.totalHits} images.`);
-                console.log(page);
             };
         } catch (error) {
             ifError();
@@ -66,29 +65,19 @@ buttonLoadMore.style.display = 'flex'
 
 
 async function onNextImagesAdd() {
-    console.log(page);
     page += 1;
-      console.log(page);
     simpleLightbox.destroy();
     try {
         const result = await fetchImages(searchValue);
-        console.log(result.totalHits);
-    
         const totalPages = result.totalHits / perPage;
-        
-        console.log(result.hits);
-        
-        console.log(totalPages);
         if (page >= totalPages) {
                 buttonHidden();
-                Notiflix.failure('Wow', "We're sorry, but you've reached the end of search results.", 'Okay');
+                Notiflix.Notify.failure(`Wow, We're sorry, but you've reached the end of search results. Okay`);
 console.log("Hello");
             }
         gallery.insertAdjacentHTML('beforeend', imageCreate(result.hits));
-        
         smothScroll();
         simpleLightbox = new SimpleLightbox(".gallery a", optionsSL);
-        console.log(result.hits);
     } catch (error) {
         ifError();
         
