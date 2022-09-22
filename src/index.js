@@ -4,6 +4,7 @@ import Notiflix from 'notiflix';
 import { fetchImages, DEFAULT_PAGE, page, perPage, resetPage } from '../src/js/fetchImages';
 import { imageCreate } from './js/imageCreate';
 import { onScroll, onToTopBtn } from '../src/js/scroll';
+import { result } from "lodash";
 
 
 const form = document.querySelector(".search-form");
@@ -54,6 +55,7 @@ buttonLoadMore.style.display = 'flex'
                 simpleLightbox.refresh();
                 buttonUnHidden();
                 Notiflix.Notify.success(`Hooray! We found ${result.totalHits} images.`);
+                console.log(page);
             };
         } catch (error) {
             ifError();
@@ -64,26 +66,32 @@ buttonLoadMore.style.display = 'flex'
 
 
 async function onNextImagesAdd() {
+    console.log(page);
     page += 1;
+      console.log(page);
     simpleLightbox.destroy();
-    
-        console.log(perPage);
     try {
         const result = await fetchImages(searchValue);
+        console.log(result.totalHits);
+    
+        const totalPages = result.totalHits / perPage;
         
-        const totalPages = totalHits / perPage;
+        console.log(result.hits);
+        
         console.log(totalPages);
-
-            if (result.page >= totalPages) {
+        if (page >= totalPages) {
                 buttonHidden();
-                Notiflix.Report.info('Wow', "We're sorry, but you've reached the end of search results.", 'Okay');
+                Notiflix.failure('Wow', "We're sorry, but you've reached the end of search results.", 'Okay');
+console.log("Hello");
             }
         gallery.insertAdjacentHTML('beforeend', imageCreate(result.hits));
+        
         smothScroll();
-        simpleLightbox.refresh();
+        simpleLightbox = new SimpleLightbox(".gallery a", optionsSL);
+        console.log(result.hits);
     } catch (error) {
         ifError();
-        console.log(totalHits);
+        
     };
 };
 

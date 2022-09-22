@@ -3,7 +3,7 @@ import axios from 'axios';
 export const DEFAULT_PAGE = 1;
 export let page = DEFAULT_PAGE;
     
-export const perPage = 40;
+export const perPage = 5;
 
 export async function fetchImages(searchValue) {
     const searchParams = new URLSearchParams ({
@@ -15,7 +15,7 @@ export async function fetchImages(searchValue) {
         per_page: perPage,
         page
     });
-    const images = await axios.get(`https://pixabay.com/api/?${searchParams}`);
+    const images = await axios.get(`https://pixabay.com/api/?${searchParams}`).then(page +=1);
     return images.data;
 };
 
