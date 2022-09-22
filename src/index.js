@@ -22,15 +22,16 @@ const optionsSL = {
     captionDelay: 250,
 };
 let simpleLightbox;
-
+simpleLightbox = new SimpleLightbox(".gallery a", optionsSL);
 onScroll();
 onToTopBtn();
-
 
 async function onSubmit(event) {
     event.preventDefault();
     searchValue = input.value.trim();
+buttonLoadMore.style.display = 'flex'
     if (searchValue === '') {
+        
         clearAll();
         buttonHidden();
         Notiflix.Notify.info('You cannot search by empty field, try again.');
@@ -39,6 +40,9 @@ async function onSubmit(event) {
         try {
             resetPage();
             const result = await fetchImages(searchValue);
+            if (result.totalHits < perPage) {
+            buttonLoadMore.style.display = 'none'
+            }
             if (result.hits < 1) {
                 form.reset();
                 clearAll();
@@ -47,7 +51,7 @@ async function onSubmit(event) {
             } else {
                 form.reset();
                 gallery.innerHTML = imageCreate(result.hits);
-                simpleLightbox = new SimpleLightbox(".gallery a", optionsSL).refresh();
+                simpleLightbox.refresh();
                 buttonUnHidden();
                 Notiflix.Notify.success(`Hooray! We found ${result.totalHits} images.`);
             };
@@ -58,8 +62,9 @@ async function onSubmit(event) {
 };
 
 
+
 async function onNextImagesAdd() {
-    page += 1;
+    //page += 1;
     simpleLightbox.destroy();
     try {
         const result = await fetchImages(searchValue);
@@ -70,11 +75,12 @@ async function onNextImagesAdd() {
             }
         gallery.insertAdjacentHTML('beforeend', imageCreate(result.hits));
         smothScroll();
-        simpleLightbox = new SimpleLightbox(".gallery a", optionsSL).refresh();
+        simpleLightbox.refresh();
     } catch (error) {
         ifError();
     };
 };
+
 
 
 function ifError() {
