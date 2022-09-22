@@ -22,16 +22,15 @@ const optionsSL = {
     captionDelay: 250,
 };
 let simpleLightbox;
-simpleLightbox = new SimpleLightbox(".gallery a", optionsSL);
+
 onScroll();
 onToTopBtn();
+
 
 async function onSubmit(event) {
     event.preventDefault();
     searchValue = input.value.trim();
-buttonLoadMore.style.display = 'flex'
     if (searchValue === '') {
-        
         clearAll();
         buttonHidden();
         Notiflix.Notify.info('You cannot search by empty field, try again.');
@@ -40,9 +39,6 @@ buttonLoadMore.style.display = 'flex'
         try {
             resetPage();
             const result = await fetchImages(searchValue);
-            if (result.totalHits < perPage) {
-            buttonLoadMore.style.display = 'none'
-            }
             if (result.hits < 1) {
                 form.reset();
                 clearAll();
@@ -51,7 +47,7 @@ buttonLoadMore.style.display = 'flex'
             } else {
                 form.reset();
                 gallery.innerHTML = imageCreate(result.hits);
-                simpleLightbox.refresh();
+                simpleLightbox = new SimpleLightbox(".gallery a", optionsSL).refresh();
                 buttonUnHidden();
                 Notiflix.Notify.success(`Hooray! We found ${result.totalHits} images.`);
             };
@@ -62,25 +58,23 @@ buttonLoadMore.style.display = 'flex'
 };
 
 
-
 async function onNextImagesAdd() {
     //page += 1;
     simpleLightbox.destroy();
     try {
         const result = await fetchImages(searchValue);
         const totalPages = page * perPage;
-            if (page >= 1) {
+            if (result.totalHits <= totalPages) {
                 buttonHidden();
                 Notiflix.Report.info('Wow', "We're sorry, but you've reached the end of search results.", 'Okay');
             }
         gallery.insertAdjacentHTML('beforeend', imageCreate(result.hits));
         smothScroll();
-        simpleLightbox.refresh();
+        simpleLightbox = new SimpleLightbox(".gallery a", optionsSL).refresh();
     } catch (error) {
         ifError();
     };
 };
-
 
 
 function ifError() {
