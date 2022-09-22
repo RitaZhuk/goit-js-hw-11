@@ -64,11 +64,11 @@ buttonLoadMore.style.display = 'flex'
 
 
 async function onNextImagesAdd() {
-    page += 1;
+    //page += 1;
     simpleLightbox.destroy();
     try {
         const result = await fetchImages(searchValue);
-        const totalPages = totalHits / 40;
+        const totalPages = totalHits / perPage;
         console.log(totalPages);
             if (result.page < totalPages) {
                 buttonHidden();
