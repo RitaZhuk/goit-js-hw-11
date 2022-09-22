@@ -66,10 +66,11 @@ buttonLoadMore.style.display = 'flex'
 async function onNextImagesAdd() {
     page += 1;
     simpleLightbox.destroy();
+    console.log(totalHits);
+        console.log(perPage);
     try {
         const result = await fetchImages(searchValue);
-        console.log(totalHits);
-        console.log(perPage);
+        
         const totalPages = totalHits / perPage;
         console.log(totalPages);
 
