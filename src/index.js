@@ -68,7 +68,7 @@ async function onNextImagesAdd() {
     simpleLightbox.destroy();
     try {
         const result = await fetchImages(searchValue);
-        const totalPages = result.totalHits / perPage;
+        const totalPages = + totalHits / + perPage;
         console.log(totalPages);
             if (page < totalPages) {
                 buttonHidden();
